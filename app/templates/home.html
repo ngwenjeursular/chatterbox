@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatterBox</title>
+</head>
+<body>
+    <h1>Welcome to ChatterBox!</h1>
+    <div id="chat">
+        <ul id="messages"></ul>
+        <input id="message" type="text" placeholder="Type a message..."/>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    
+    <!-- Include SocketIO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <script type="text/javascript">
+        // Connect to the Flask-SocketIO server
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // Listen for 'message' events from the server
+        socket.on('message', function(msg) {
+            var messages = document.getElementById('messages');
+            var newMessage = document.createElement('li');
+            newMessage.textContent = msg;
+            messages.appendChild(newMessage);
+        });
+
+        // Function to send a message
+        function sendMessage() {
+            var messageInput = document.getElementById('message');
+            var message = messageInput.value;
+            socket.emit('message', message); // Sends the message to the server using Socket.IO’s emit method
+            messageInput.value = '';  // Clear the input after sending
+        }
+    </script>
+</body>
+</html>

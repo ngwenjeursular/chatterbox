@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}ChatterBox{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to ChatterBox</h1>
+        <nav>
+			<ul>
+				<li><a href="{{ url_for('home.index') }}">Home</a></li>
+				{% if current_user.is_authenticated %}
+					<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+				{% else %}
+					<li><a href="{{ url_for('auth.login') }}">Login</a></li>
+					<li><a href="{{ url_for('auth.register') }}">Register</a></li>
+				{% endif %}
+			</ul>
+		</nav>
+		
+    </header>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+
+    <footer>
+        <p>&copy; 2024 ChatterBox</p>
+    </footer>
+</body>
+</html>
