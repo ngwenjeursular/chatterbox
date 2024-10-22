@@ -66,7 +66,7 @@ def save_picture(form_picture):
     picture_path = os.path.join(current_app.root_path, 'static/uploads', picture_fn)  # Full path
 
     # Resize the image before saving
-    output_size = (125, 125)  # Adjust the size for a round profile pic look
+    output_size = (525, 525)  # Adjust the size for a round profile pic look
     i = Image.open(form_picture)
     i.thumbnail(output_size)  # Resize the image
 
