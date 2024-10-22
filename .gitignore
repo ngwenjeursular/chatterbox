@@ -40,3 +40,7 @@ Desktop.ini
 
 # Pytest
 .cache
+
+#css
+.swp
+*.swp

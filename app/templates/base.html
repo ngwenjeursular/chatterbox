@@ -22,6 +22,8 @@
 		</nav>
 		
     </header>
+	<a href="{{ url_for('auth.profile') }}">My Profile</a>
+
 
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=True) %}

@@ -1,0 +1,54 @@
+/* Centering the container and adding some margins */
+.profile-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Styling the profile picture to be round */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the profile form */
+.profile-form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profile-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-form button:hover {
+    background-color: #45a049;
+}

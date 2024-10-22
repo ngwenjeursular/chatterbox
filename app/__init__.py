@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_socketio import SocketIO
 from app.config import config
 from flask_migrate import Migrate
+import os
 
 db = SQLAlchemy()
 socketio = SocketIO()
@@ -11,6 +12,10 @@ socketio = SocketIO()
 def create_app(config_name='development'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/uploads')
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
 
     db.init_app(app)
     socketio.init_app(app)
@@ -31,9 +36,11 @@ def create_app(config_name='development'):
     # Import and register blueprints
     from app.routes.home import home_bp
     from app.routes.auth import auth_bp
+    from app.routes.profile import profile_bp
 
     app.register_blueprint(home_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(profile_bp)
 
     with app.app_context():
         db.create_all()

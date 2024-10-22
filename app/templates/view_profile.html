@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="profile-container">
+        <!-- Display the profile picture -->
+        <img class="profile-pic" src="{{ url_for('static', filename='uploads/' + current_user.profile_picture) }}" alt="Profile Picture">
+
+    </div>
+
+    <!-- Profile Update Form -->
+    <div class="profile-form">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <!-- Email Field -->
+            <label for="email">Email</label>
+            {{ form.email(class="form-control", id="email") }}
+
+            <!-- Profile Picture Upload -->
+            <label for="profile_picture">Profile Picture</label>
+            {{ form.profile_picture(class="form-control-file", id="profile_picture") }}
+
+            <!-- Submit Button -->
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+
+</body>
+</html>
