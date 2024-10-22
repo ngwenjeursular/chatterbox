@@ -75,6 +75,8 @@ def save_picture(form_picture):
     return picture_fn  # Return only the filename
 
 
+
+import os
 @auth_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -84,8 +86,15 @@ def profile():
         current_user.email = form.email.data
 
         if form.profile_picture.data:
-            picture_file = save_picture(form.profile_picture.data)  # Call save_picture
-            current_user.profile_picture = picture_file  # Store only the filename
+            # If the user already has a profile picture, delete the old one
+            if current_user.profile_picture:
+                old_picture_path = os.path.join(current_app.root_path, 'static/uploads', current_user.profile_picture)
+                if os.path.exists(old_picture_path):
+                    os.remove(old_picture_path)
+
+            # Save new profile picture
+            picture_file = save_picture(form.profile_picture.data)
+            current_user.profile_picture = picture_file
 
         db.session.commit()
         flash('Your profile has been updated.')
