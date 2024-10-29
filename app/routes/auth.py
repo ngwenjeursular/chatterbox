@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from app import db
@@ -44,6 +44,7 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if user and check_password_hash(user.password, password):
+            session['user_id'] = user.id
             login_user(user)
             return redirect(url_for('home.index'))
         else:
@@ -84,6 +85,7 @@ def profile():
 
     if form.validate_on_submit():
         current_user.email = form.email.data
+        current_user.nickname = form.nickname.data
 
         if form.profile_picture.data:
             # If the user already has a profile picture, delete the old one
@@ -97,9 +99,23 @@ def profile():
             current_user.profile_picture = picture_file
 
         db.session.commit()
-        flash('Your profile has been updated.')
+        #flash('Your profile has been updated.')
         return redirect(url_for('auth.profile'))
 
     # Pre-fill the form with current user data
     form.email.data = current_user.email
-    return render_template('view_profile.html', form=form)
+    form.nickname.data = current_user.nickname
+
+    # Generate the profile picture URL
+    profile_picture_url = url_for('static', filename=f'uploads/{current_user.profile_picture}') \
+                          if current_user.profile_picture else None
+    return render_template('view_profile.html', form=form, profile_picture_url=profile_picture_url)
+
+
+@auth_bp.route('/set_guest_name', methods=['POST'])
+def set_guest_name():
+	guest_name = request.form.get('guest_name')
+	if guest_name:
+		session['guest_name'] = guest_name
+		return redirect(url_for('home.index'))
+	return redirect(url_for('home.index'))

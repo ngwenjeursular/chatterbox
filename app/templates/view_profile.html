@@ -15,14 +15,22 @@
 
         <!-- Display the profile picture -->
         <!-- Profile picture thumbnail -->
+        {% if current_user.profile_picture %}
         <img class="profile-pic" src="{{ url_for('static', filename='uploads/' + current_user.profile_picture) }}" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#profilePicModal" style="cursor: pointer;">
-
+    {% else %}
+        <p>No profile picture uploaded yet.</p>
+    {% endif %}
         <!-- Modal to show full-size picture -->
         <div class="modal fade" id="profilePicModal" tabindex="-1" aria-labelledby="profilePicModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
+                        {% if current_user.profile_picture %}
                         <img class="img-fluid" src="{{ url_for('static', filename='uploads/' + current_user.profile_picture) }}" alt="Full-size Profile Picture">
+                        {% else %}
+                        <p>No profile picture uploaded yet.</p>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -38,6 +46,9 @@
             <label for="email">Email</label>
             {{ form.email(class="form-control", id="email") }}
 
+            <label for="nickname">Nickname</label>
+            {{ form.nickname(class="form-control") }}
+
             <!-- Profile Picture Upload -->
             <label for="profile_picture">Profile Picture</label>
             {{ form.profile_picture(class="form-control-file", id="profile_picture") }}
@@ -46,6 +57,8 @@
             <button type="submit">Update Profile</button>
         </form>
     </div>
+
+    <button type="button" class="btn btn-primary mt-4" onclick="window.location.href='{{ url_for('home.index') }}';">Back Home</button>
 
 </body>
 </html>

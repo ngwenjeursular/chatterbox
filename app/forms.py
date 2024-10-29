@@ -13,6 +13,7 @@ class UpdateProfileForm(FlaskForm):
 
 class ProfileForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
+    nickname = StringField('Nickname', validators=[DataRequired()])
     profile_picture = FileField('Profile Picture', validators=[
         FileAllowed(['jpg', 'png'], 'Images only!')
     ])

@@ -4,6 +4,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<div class="login-form">
     <h2>Login</h2>
     <form action="{{ url_for('auth.login') }}" method="post">
         <label for="username">Username:</label>
@@ -15,5 +16,5 @@
         <button type="submit">Login</button>
     </form>
 	<a href="{{ url_for('auth.register') }}">Don't have an account? Register</a>
-
+</div>
 {% endblock %}

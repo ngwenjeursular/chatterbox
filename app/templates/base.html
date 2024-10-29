@@ -26,19 +26,46 @@
 
 
     <div class="container">
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </div>
+		{% block content %}
+        <!-- Content will be injected here from child templates -->
+        {% endblock %}
+		{% if logged_in %}
+			<h2>Hi {{ nickname }}!</h2>
+			<p>Ready to join or create a room?</p>
+		{% else %}
+			<h2>Use Chatterbox as a guest!</h2>
+			<p>Enter your name to continue:</p>
+			<form method="POST" action="{{ url_for('auth.set_guest_name') }}">
+				<input type="text" name="guest_name" placeholder="Enter your name" required>
+				<button type="submit">Continue</button>
+			</form>
+		{% endif %}
+
+		<h3>Join a Room</h3>
+		<form method="POST" action="{{ url_for('room.join_room') }}">
+			<input type="text" name="room_code" placeholder="Enter room code" required>
+			<button type="submit">Join Room</button>
+		</form>
+
+		<h3>Create a New Room</h3>
+		<form method="POST" action="{{ url_for('room.create_room') }}">
+			<button type="submit">Create Room</button>
+		</form>
+	</div>
 
 
     <footer>
         <p>&copy; 2024 ChatterBox</p>
     </footer>
+	<script>
+		// Initialize variables in JavaScript with data from the Flask template
+		let username = "{{ nickname }}";  // Flask template variable
+		let profilePicture = "{{ profile_picture }}"; // Flask template variable
+	
+		// Use username and profilePicture as needed
+		console.log("User:", username);
+		console.log("Profile Picture:", profilePicture);
+	</script>
+	
 </body>
 </html>
