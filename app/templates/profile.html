@@ -1,21 +1,57 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}ChatterBox{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to ChatterBox</h1>
+        <nav>
+			<ul>
+				
+					<button id="login-btn"><a href="{{ url_for('auth.login') }}">Login</a></button>
+					<button id="guest-login-btn">
+						<a href="{{ url_for('home.guest_login') }}">Guest login</a>
+					</button>
+					
+			</ul>
+		</nav>
+		
+    </header>
 
-{% block title %}Profile{% endblock %}
 
-{% block content %}
-    <h2>Update Profile</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.email.label }}
-            {{ form.email(size=32) }}
-        </div>
-        <div>
-            {{ form.profile_picture.label }}
-            {{ form.profile_picture() }}
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
-{% endblock %}
+    <div class="container">
+		{% block content %}
+        <!-- Content will be injected here from child templates -->
+        {% endblock %}
+		{% if logged_in %}
+			<h2>Hi {{ nickname }}!</h2>
+			<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+			<li><a href="{{ url_for('auth.profile') }}">My Profile</a></li>
+
+			<p>Ready to join or create a room?</p>
+			<button id="chat"><a href="{{ url_for('home.start_chat') }}">Start Chat</a></button>
+
+		{% endif %}
+		
+	</div>
+
+
+    <footer>
+        <p>&copy; 2024 ChatterBox</p>
+    </footer>
+	<script>
+		// Initialize variables in JavaScript with data from the Flask template
+		let username = "{{ username }}";  // Flask template variable
+		let profilePicture = "{{ profile_picture }}"; // Flask template variable
+	
+		// Use username and profilePicture as needed
+		console.log("User:", username);
+		console.log("Profile Picture:", profilePicture);
+	</script>
+	
+</body>
+</html>

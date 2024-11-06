@@ -66,47 +66,34 @@ body {
     background-color: #45a049;
 }
 
-.chat-room-container {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
-}
-.chat-box {
-	height: 300px;
-	border: 1px solid #ccc;
-	overflow-y: scroll;
-	padding: 10px;
-	margin-bottom: 10px;
-}
-.message-input-container {
-	display: flex;
-	gap: 10px;
-}
+/**/
+
+
+
 #message {
 	flex: 1;
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
-button {
-	padding: 10px 20px;
-	border: none;
-	background-color: #007bff;
-	color: white;
-	cursor: pointer;
-}
-button:hover {
-	background-color: #0056b3;
-}
+/***/
 
-/* Align incoming to the left */
-.incoming {
-	justify-content: flex-start;
-}
-
-/* Align outgoing to the right */
 .outgoing {
-	justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.incoming {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Basic container styling */
+.message-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	max-width: 100%; 
 }
 
 /* Profile picture styling */
@@ -125,15 +112,10 @@ button:hover {
 
 .outgoing .message-content {
 	background-color: #cce5ff; /* Outgoing message color */
+	order: -1;
 }
 
-/* Basic container styling */
-.message-container {
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px;
-	max-width: 100%; 
-}
+
 
 .message-content {
 	position: relative;
@@ -166,46 +148,19 @@ button:hover {
 	margin-top: 5px; /* Add space above timestamp */
 }
 
-.input-container {
-	display: flex;
-	align-items: center;
-	width: 100%;
-}
 
-#message-input {
-	width: 100%;
-	min-height: 40px;
-	max-height: 150px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	resize: none;
-	overflow: hidden;
-	box-sizing: border-box;
-	margin-right: 8px; /* Spacing between textarea and button */
-}
 
-#send-btn {
-	padding: 10px 20px;
-	border: none;
-	background-color: #007bff;
-	color: white;
-	border-radius: 4px;
-	cursor: pointer;
-}
 
-#send-btn:hover {
-	background-color: #0056b3;
-}
 
 
 /*system*/
 .system-message {
     text-align: center;
-    font-style: italic;
-    color: gray;
+    font-style: lucida handwriting;
+	font-family: 
+    color: white;
     margin: 15px auto; /* centers the message block */
-    background-color: #f5f5f5;
+    background-color: Transparent;
     padding: 10px;
     width: fit-content; /* sizes the message container based on its content */
     border-radius: 5px;
@@ -214,7 +169,258 @@ button:hover {
 .system-time {
     display: block;
     font-size: 0.8em;
-    color: darkgray;
+    color: white;
     text-align: center;
     margin-top: 5px;
+}
+
+/* Quick Inline Styles for Demonstration */
+.hero {
+	text-align: center;
+	padding: 4rem 2rem;
+	background: url('{{ url_for("static", filename="images/hero-bg.jpg") }}') no-repeat center center;
+	background-size: cover;
+	color: #ffffff;
+}
+
+.hero h1 {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.hero p {
+	font-size: 1.25rem;
+	margin-bottom: 2rem;
+}
+
+.feature-section {
+	display: flex;
+	gap: 1.5rem;
+	padding: 2rem;
+	justify-content: center;
+}
+
+.feature {
+	background: #f5f5f5;
+	padding: 1.5rem;
+	border-radius: 8px;
+	flex: 1;
+	text-align: center;
+}
+
+.feature h3 {
+	margin-top: 0;
+}
+
+footer {
+	padding: 1rem;
+	text-align: center;
+	background-color: #222;
+	color: #fff;
+}
+
+.accordion {
+	color: black;
+}
+
+.buttons-box {
+	padding: 20px 50px;
+	display: flex;
+	justify-content: center;
+	
+	
+}
+.button-link {
+	border: none;
+	background-color: black;
+	padding: 18px 65px;
+	border-radius: 50px;
+	box-shadow: -8px -8px 15px rgba(255, 255, 255, .8),
+				10px 10px 10px rgba(0, 0, 0, .5);
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 16px;
+	transition: all 0.2s ease;
+}
+
+.button-link a {
+	display: block;
+	text-decoration: none;
+	color: white;
+
+}
+
+
+.button-link:hover {
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.2),
+				8px 8px 15px rgba(0, 0, 0, 0.7);
+}
+
+.button-link:active {
+	box-shadow: inset -6px -6px 10px rgba(255, 255, 255, 0.2),
+				inset 8px 8px 15px rgba(0, 0, 0, 0.5);
+	color: #ddd;
+}
+
+
+#guest-link {
+	color: white;
+}
+
+
+/*******************************************************/
+
+
+.chat-room-container {
+	background-color: #1a1a1a;
+	border: 1px solid #333;
+	border-radius: 2px;
+	width: 100%;
+	max-width: 90%;
+	padding: 20px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	margin: 0 auto;
+}
+
+/* Header */
+.chat-room-container h2 {
+	text-align: center;
+	color: #f4f4f4;
+	margin-bottom: 10px;
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+
+/* Room code and creator info */
+.chat-room-container p {
+	color: #bbb;
+	font-size: 0.9rem;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#roomCode {
+	background-color: #333;
+	color: #f4f4f4;
+	border: none;
+	padding: 6px;
+	font-size: 0.9rem;
+	border-radius: 4px;
+	text-align: center;
+	width: 80px;
+}
+
+button {
+	background-color: #333;
+	color: #f4f4f4;
+	border: none;
+	padding: 8px 12px;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: bold;
+	transition: background 0.3s;
+	margin-top: 5px;
+}
+
+button:hover {
+	background-color: #555;
+}
+
+/* Chat box */
+.chat-box {
+	background-color: #262626;
+	border-radius: 8px;
+	padding: 15px;
+	height: 400px;
+	overflow-y: auto;
+	border: 1px solid #333;
+	margin-bottom: 15px;
+}
+
+.chat-box p {
+	color: #f4f4f4;
+	font-size: 0.9rem;
+	margin-bottom: 10px;
+	line-height: 1.4;
+}
+
+/* Message input container */
+.message-input-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+.input-container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: #333;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+#message-input {
+	width: 100%;
+	border: none;
+	padding: 10px;
+	font-size: 1rem;
+	color: #f4f4f4;
+	background-color: #333;
+	resize: none;
+	border-radius: 6px 0 0 6px;
+	box-sizing: border-box;
+}
+
+#message-input::placeholder {
+	color: #bbb;
+}
+
+/* Style the Send Button */
+#send-btn {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #f4f4f4;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-left: 10px;
+}
+
+#send-btn:hover {
+	background-color: #555; /* Slightly lighter on hover */
+}
+/* Leave room button */
+#leave-room-button {
+	width: 100%;
+	background-color: #d9534f;
+	padding: 10px;
+	margin-top: 10px;
+	color: #f4f4f4;
+	font-weight: bold;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+#leave-room-button:hover {
+	background-color: #c9302c;
+}
+
+/* Scrollbar styling */
+.chat-box::-webkit-scrollbar {
+	width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+	background-color: #555;
+	border-radius: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+	background-color: #777;
 }

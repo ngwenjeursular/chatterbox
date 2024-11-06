@@ -39,11 +39,13 @@ def create_app(config_name='development'):
     from app.routes.auth import auth_bp
     from app.routes.profile import profile_bp
     from app.routes.room import room_bp
+    from app.routes.messages import messages_bp
 
     app.register_blueprint(home_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(profile_bp)
     app.register_blueprint(room_bp, url_prefix='/room')
+    app.register_blueprint(messages_bp)
 
     with app.app_context():
         db.create_all()

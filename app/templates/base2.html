@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}ChatterBox{% endblock %}</title>
+    
+</head>
+<body>
+    
+
+    <!-- Hero Section -->
+    <div class="hero">
+		<div class="accordion">
+			<h1>Welcome to ChatterBox</h1>
+        	<p>Connect, communicate, and share with your community in real time!</p>
+		</div>
+        
+        <div class="neu-container">
+            <div class="buttons-box">
+                <button class="button-link" style="margin: 0.5rem;">
+                    <a href="{{ url_for('auth.login') }}" >Login</a>
+                </button>
+                <button class="button-link" style="margin: 0.5rem;">
+                    <a href="{{ url_for('home.guest_login') }}" >Join as Guest</a>
+                </button>
+            </div>   
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="feature-section">
+        <div class="feature">
+            <h3>Real-time Chat</h3>
+            <p>Engage in real-time conversations with friends or community members instantly.</p>
+        </div>
+        <div class="feature">
+            <h3>Guest Access</h3>
+            <p>Jump right into conversations without needing to create an account.</p>
+        </div>
+        <div class="feature">
+            <h3>Personal Profiles</h3>
+            <p>Create a personalized profile to save chats and connect with others.</p>
+        </div>
+    </section>
+   
+
+    <footer>
+        <p>&copy; 2024 ChatterBox. All rights reserved.</p>
+    </footer>
+</body>
+</html>

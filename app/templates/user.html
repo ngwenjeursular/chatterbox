@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatterBox - User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <!-- Container for user-specific content -->
+    <div class="container">
+        <!-- Check if the user is logged in -->
+        {% if session['logged_in'] %}
+            <!-- Welcome Message -->
+            <h2 style="color: black;">Hi {{ nickname }}!</h2>
+            
+            <!-- Navigation Buttons -->
+            <div class="buttons-box">
+                <button class="button-link" style="margin: 0.5rem;">
+                    <a href="{{ url_for('auth.logout') }}" >Logout</a>
+                </button>
+                <button class="button-link" style="margin: 0.5rem;">
+                    <a href="{{ url_for('auth.profile') }}"> My Profile</a>
+                </button>
+            </div>
+
+            <!-- Prompt for Joining or Creating a Room -->
+            <p>Ready to join or create a room?</p>
+            <button class="button-link" id="chat">
+                <a href="{{ url_for('home.start_chat') }}">Start Chat</a>
+            </button>
+        {% else %}
+            <!-- Message if the user is not logged in -->
+            <p style="color: red;">You must be logged in to view this page. <a href="{{ url_for('auth.login') }}">Login here</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

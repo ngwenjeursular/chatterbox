@@ -21,10 +21,12 @@ def register():
 
         if User.query.filter_by(username=username).first():
             flash('Username already exists')
+            print("username already exists")
             return redirect(url_for('auth.register'))
         
         if User.query.filter_by(email=email).first():
             flash('Email already registered')
+            print("email is already in use")
             return redirect(url_for('auth.register'))
 
         new_user = User(username=username, email=email, password=generate_password_hash(password))
@@ -33,7 +35,7 @@ def register():
         flash('Account created! You can now log in.')
         return redirect(url_for('auth.login'))
 
-    return render_template('register.html')
+    return render_template('register2.html')
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -45,18 +47,22 @@ def login():
 
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
+            session['nickname'] = user.nickname
+            session['logged_in'] = True
+            session.modified = True
             login_user(user)
-            return redirect(url_for('home.index'))
+            return redirect(url_for('home.user'))
         else:
             flash('Login failed. Check your username and password.')
+            print('Login failed. Check your username and password.')
 
-    return render_template('login.html')
+    return render_template('login2.html')
 
 @auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('home.index'))
 
 
 def save_picture(form_picture):
@@ -85,7 +91,8 @@ def profile():
 
     if form.validate_on_submit():
         current_user.email = form.email.data
-        current_user.nickname = form.nickname.data
+        #current_user.nickname = form.nickname.data
+        current_user.nickname = form.nickname.data or current_user.username
 
         if form.profile_picture.data:
             # If the user already has a profile picture, delete the old one
@@ -104,7 +111,9 @@ def profile():
 
     # Pre-fill the form with current user data
     form.email.data = current_user.email
-    form.nickname.data = current_user.nickname
+    #form.nickname.data = current_user.nickname
+    form.nickname.data = current_user.nickname or current_user.username
+
 
     # Generate the profile picture URL
     profile_picture_url = url_for('static', filename=f'uploads/{current_user.profile_picture}') \
@@ -114,8 +123,9 @@ def profile():
 
 @auth_bp.route('/set_guest_name', methods=['POST'])
 def set_guest_name():
-	guest_name = request.form.get('guest_name')
-	if guest_name:
-		session['guest_name'] = guest_name
-		return redirect(url_for('home.index'))
-	return redirect(url_for('home.index'))
+    guest_name = request.form.get('guest_name')
+    if guest_name:
+        session['guest_name'] = guest_name
+        #return redirect(url_for('home.index'))  # Redirect to the desired page
+
+    return render_template('guest-login.html', guest_name=guest_name)

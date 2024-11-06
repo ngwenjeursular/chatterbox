@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <title>{% block title %}ChatterBox{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="neu-container">
+            <h2 class="page-heading">Use Chatterbox as a Guest!</h2>
+            <p class="instruction">Enter your name to continue:</p>
+            <form method="POST" action="{{ url_for('auth.set_guest_name') }}" class="guest-form">
+                <input type="text" name="guest_name" placeholder="Enter your name" required class="input-field">
+                <button type="submit" class="button-link" id="guest-link">Submit</button>
+                <button class="button-link" id="chat">
+                    <a href="{{ url_for('home.start_chat') }}">Start Chat</a>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

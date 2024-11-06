@@ -14,6 +14,8 @@
 				<li><a href="{{ url_for('home.index') }}">Home</a></li>
 				{% if current_user.is_authenticated %}
 					<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+					<li><a href="{{ url_for('auth.profile') }}">My Profile</a></li>
+
 				{% else %}
 					<li><a href="{{ url_for('auth.login') }}">Login</a></li>
 					<li><a href="{{ url_for('auth.register') }}">Register</a></li>
@@ -22,7 +24,6 @@
 		</nav>
 		
     </header>
-	<a href="{{ url_for('auth.profile') }}">My Profile</a>
 
 
     <div class="container">
@@ -59,7 +60,7 @@
     </footer>
 	<script>
 		// Initialize variables in JavaScript with data from the Flask template
-		let username = "{{ nickname }}";  // Flask template variable
+		let username = "{{ username }}";  // Flask template variable
 		let profilePicture = "{{ profile_picture }}"; // Flask template variable
 	
 		// Use username and profilePicture as needed
