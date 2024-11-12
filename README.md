@@ -11,7 +11,6 @@ ChatterBox is a real-time chat room application designed for smooth, instantaneo
 - [Customization](#customization)
 - [Future Improvements](#future-improvements)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - **Real-time Messaging:** Users can chat in real time, seeing each message immediately as it’s sent.
@@ -32,7 +31,7 @@ To set up ChatterBox on your local machine, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/chatterbox.git
+    git clone https://github.com/ngwenjeursular/chatterbox.git
     ```
 
 2. Navigate to the project folder:
