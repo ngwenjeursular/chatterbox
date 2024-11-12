@@ -100,11 +100,6 @@ function sendMessage() {
     saveMessage(room, username, message, timestamp);
 }
 
-// Set to store IDs of rendered messages to avoid duplicates
-const addedMessageIds = new Set();
-
-
-
 socket.on('receive_message', function(data) {
 	
 
@@ -228,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 
-	
+	/*
 	// Track the latest message's timestamp to avoid duplicates
 	let latestMessageTimestamp = null;
 
@@ -250,7 +245,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 			.catch(error => console.error("Error loading messages:", error));
 	}
-		
+	*/
+	if (roomCode) {
+		fetch(`/room/load_messages/${roomCode}`)
+			.then(response => response.json())
+			.then(messages => {
+				messages.forEach(data => displayStyledMessage(data));
+			})
+			.catch(error => console.error("Error loading messages:", error));
+	}
 
 	// Function to display styled messages
 	function displayStyledMessage(data, isRealTime = true) {
