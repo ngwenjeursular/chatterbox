@@ -71,9 +71,9 @@ body {
 	background-color: black;
 	color: white;
 }
-
+/*
 .button:active {
-	transform: scale(0.98); /* Slight scale-down effect when clicking */
+	transform: scale(0.98); /* Slight scale-down effect when clicking *
 }
 
 
